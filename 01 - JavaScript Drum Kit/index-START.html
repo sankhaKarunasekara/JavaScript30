@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS Drum Kit</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 
@@ -57,10 +59,31 @@
   <audio data-key="75" src="sounds/tom.wav"></audio>
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
-<script>
+  <script>
+    
+    /* My code Note: This is the first time I written code like this*/
+    const keys = document.querySelector(".keys");
 
-</script>
+    document.onkeypress = function (e) {
+
+      let code = e.keyCode;
+      let key = keys.querySelector("[data-key='" + code + "']");
+      let audio = document.querySelector("audio[data-key='" + code + "']");
+
+      key.className = key.className + " playing";
+      //key.classList.add('playing'); //more cleaner
+
+      audio.currentTime = 0; //rewind audio to 0 sec
+      audio.play();
+
+      //better use another event listner
+      setTimeout(function () {
+        key.className = "key";
+      }, 50);
+    };
+  </script>
 
 
 </body>
+
 </html>
